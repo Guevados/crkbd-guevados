@@ -20,7 +20,7 @@
 //#define RETRO_TAPPING
 #define IGNORE_MOD_TAP_INTERRUPT
 
-#define OLED_FONT_H "keyboards/crkbd/keymaps/jcnerd/glcdfont.c"
+#define OLED_FONT_H "keyboards/crkbd/keymaps/waldo/glcdfont.c"
 // #define OLED_FONT_WIDTH 5
 // #define OLED_FONT_HEIGHT 7
 
@@ -42,7 +42,7 @@
  * because they take up a lot of space.  Disable until you can successfully compile your firmware. */
 #   define DISABLE_RGB_MATRIX_ALPHAS_MODS
 #   define DISABLE_RGB_MATRIX_GRADIENT_UP_DOWN
-//#   define DISABLE_RGB_MATRIX_BREATHING
+//#   define DISABLE_RGB_MATRIX_BREATHING 
 #   define DISABLE_RGB_MATRIX_BAND_SAT
 #   define DISABLE_RGB_MATRIX_BAND_VAL
 #   define DISABLE_RGB_MATRIX_BAND_PINWHEEL_SAT

@@ -1,7 +1,4 @@
 #include QMK_KEYBOARD_H
-
-extern keymap_config_t keymap_config;
-
 #ifdef RGBLIGHT_ENABLE
   //Following line allows macro to read current RGB settings
   extern rgblight_config_t rgblight_config;
@@ -48,35 +45,35 @@ enum {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-      KC_ESC,TD(TD_COMI),TD(TD_COMM),TD(TD_DOT),KC_Y, KC_Q,                     KC_F,    KC_G,    KC_R,    KC_W,    KC_P,    KC_BSPC,
+    KC_TAB   ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,                     KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_BSPC ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       KC_LCTL,  KC_A,   KC_O,    KC_E,    KC_U,     KC_I,                       KC_D,    KC_T,    KC_N,    KC_S,  KC_M, TD(TD_SLA),
+    KC_LCTL  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,                     KC_H    ,KC_J    ,KC_K    ,KC_L    ,TD(TD_PC),TD(TD_COMI),
   //---------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-TD(TD_CAPLOCK),TD(TD_PC),  KC_X,  KC_C,     KC_V,    KC_Z,                       KC_H,    KC_J,    KC_K,    KC_L,  KC_B, RSFT_T(KC_ENT),
+    TD(TD_CAPLOCK),KC_Z , KC_X ,KC_C    ,KC_V    ,KC_B    ,                     KC_N    ,KC_M,TD(TD_COMM),TD(TD_DOT),TD(TD_SLA),KC_ESC,
   //---------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         KC_LGUI, LOWER, KC_SPC,     RSFT_T(KC_ENT), RAISE, TD(TD_ALT)
+                                        KC_LGUI  ,LOWER   ,KC_SPC  ,RSFT_T(KC_ENT), RAISE, TD(TD_ALT)
                                       //|--------------------------|  |--------------------------|
   ),
 
   [_LOWER] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_BSPC,
+    KC_ESC   ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                     KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_BSPC ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_TAB , KC_AT, KC_QUOTE, XXXXXXX, KC_VOLU, LALT(KC_G),                    XXXXXXX, RALT(KC_PSCR), XXXXXXX,   XXXXXXX, KC_UP, KC_DEL,
+    KC_TAB   ,KC_AT   ,KC_QUOTE,XXXXXXX ,KC_VOLU ,LALT(KC_G),                   XXXXXXX ,RALT(KC_PSCR),XXXXXXX,XXXXXXX,KC_UP,KC_DEL  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, XXXXXXX, XXXXXXX, KC_MPRV, KC_VOLD, KC_MNXT,                      XXXXXXX,KC_MYCM, XXXXXXX, KC_LEFT,  KC_DOWN, KC_RGHT,
+    KC_LSFT  ,XXXXXXX ,XXXXXXX ,KC_MPRV ,KC_VOLD ,KC_MNXT ,                     XXXXXXX ,KC_MYCM ,XXXXXXX ,KC_LEFT ,KC_DOWN ,KC_RGHT ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                    LCTL(KC_LALT), KC_SPC, KC_TRNS,    RAISE, KC_SPC, KC_RALT
+                                    LCTL(KC_LALT),KC_TRNS ,KC_SPC  ,   KC_SPC  ,RAISE   ,KC_RALT
                                       //|--------------------------|  |--------------------------|
   ),
 
   [_RAISE] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     KC_ESC,  KC_EXLM, KC_QUOTE, LALT(KC_3), KC_DLR, KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+    TD(TD_GRAVE),  KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC,                    KC_CIRC ,KC_AMPR ,KC_ASTR ,KC_LPRN ,KC_RPRN ,KC_BSPC ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_GRV, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS, KC_EQL, RALT(KC_LBRC),  RALT(KC_RBRC), KC_PIPE, KC_DEL,
+    XXXXXXX  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                     KC_MINS ,KC_EQL  ,KC_LBRC ,KC_RBRC ,KC_PIPE ,KC_DEL  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, RALT(KC_QUOT), RALT(KC_NUHS), KC_BSLS, KC_ENT,
+    XXXXXXX  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                     KC_UNDS ,KC_PLUS ,KC_LCBR ,KC_RCBR ,KC_BSLS ,KC_ENT  ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                             KC_LGUI, LOWER, KC_SPC,    KC_SPC, KC_TRNS, KC_RALT
                                       //|--------------------------|  |--------------------------|
@@ -84,13 +81,13 @@ TD(TD_CAPLOCK),TD(TD_PC),  KC_X,  KC_C,     KC_V,    KC_Z,                      
 
   [_ADJUST] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-      XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, RGBRST, RGB_TOG,                     KC_F1, KC_F2,  KC_F3,   KC_F4,   KC_F5,   KC_F6,\
+    XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, RGBRST, RGB_TOG,                     KC_F1, KC_F2,  KC_F3,   KC_F4,   KC_F5,   KC_F6,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     XXXXXXX, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD,                      KC_F7, KC_F8,  KC_F9,   KC_F10,   KC_F11,   KC_F12,  \
+    XXXXXXX, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD,                      KC_F7, KC_F8,  KC_F9,   KC_F10,   KC_F11,   KC_F12,  \
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, XXXXXXX,                      RESET, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
+    XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, XXXXXXX,                      RESET, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         KC_LCTL, KC_TRNS, KC_SPC,    KC_SPC, KC_TRNS, KC_RALT \
+                                        KC_LCTL, KC_TRNS, KC_SPC,    KC_SPC, KC_TRNS, KC_RALT \
                                       //|--------------------------|  |--------------------------|
   )
 };
@@ -103,8 +100,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SLA] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_QUES),
     [TD_CAPLOCK] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_ALT] = ACTION_TAP_DANCE_DOUBLE(KC_RALT, KC_LALT),
-    [TD_COMM] = ACTION_TAP_DANCE_DOUBLE(KC_COMM, KC_GRV),
-    [TD_DOT] = ACTION_TAP_DANCE_DOUBLE(KC_DOT, RALT(KC_DOT)),
+    [TD_COMM] = ACTION_TAP_DANCE_DOUBLE(KC_COMM, LSFT(KC_COMM)),
+    [TD_DOT] = ACTION_TAP_DANCE_DOUBLE(KC_DOT, LSFT(KC_DOT)),
     [TD_GRAVE] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, LSFT(KC_ZKHK)),
 };
 
@@ -328,6 +325,8 @@ void rgb_matrix_indicators_user(void) {
     }
   }
 
+//primary display
+
   void render_status_main(void) {
     render_logo();
     render_space();
@@ -336,6 +335,8 @@ void rgb_matrix_indicators_user(void) {
     render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
     render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
   }
+
+//secondary display
 
   void render_status_secondary(void) {
     render_logo();
@@ -348,10 +349,10 @@ void rgb_matrix_indicators_user(void) {
 
   void oled_task_user(void) {
     if (timer_elapsed32(oled_timer) > 1500000) {
-      oled_off();
-      return;
+      //oled_off();
+      //return;
     } else {
-      oled_on();
+      //oled_on();
 
     if (is_keyboard_master()) {
         render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
@@ -406,7 +407,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case MACRO2:
         if (record->event.pressed) {
           SEND_STRING("aqui el texto de la macro2\nque quieras pegar");
-        } else { 
+        } else {
 
       }
       return false;*/

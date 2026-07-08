@@ -1,0 +1,92 @@
+# Workflow automatizado para generar diagramas SVG del keymap con keymap-drawer
+# https://github.com/caksoylar/keymap-drawer
+#
+# Este workflow convierte tu keymap.c (QMK) en un diagrama visual SVG:
+#   keymap.c  →  qmk c2json  →  JSON  →  keymap parse  →  YAML  →  keymap draw  →  SVG
+#
+# Los archivos generados se guardan en keymap-drawer/ y se commitean al repo automáticamente.
+name: Draw keymap
+
+on:
+  workflow_dispatch:           # disparo manual desde la pestaña Actions
+  push:                       # disparo automático al cambiar estos archivos
+    paths:
+      - "keymap.c"
+      - "config.h"
+      - "rules.mk"
+      - "keymap_drawer.config.yaml"
+
+# El firmware QMK completo se clona en esta ruta
+env:
+  QMK_HOME: /home/runner/qmk_firmware
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # permiso para commitear al repo
+
+    steps:
+      # 1. Checkout del repo del usuario
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Instalar keymap-drawer (aislado con pipx)
+      - name: Install keymap-drawer
+        run: pipx install keymap-drawer
+
+      # 3. Instalar QMK CLI (necesario para qmk c2json)
+      - name: Install QMK CLI
+        run: |
+          python3 -m pip install --user qmk
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      # 4. Clonar QMK firmware (shallow clone, solo lo necesario)
+      - name: Clone QMK firmware
+        run: git clone --depth 1 https://github.com/qmk/qmk_firmware.git ~/qmk_firmware
+
+      # 5. Colocar los archivos del keymap del usuario en el firmware QMK
+      - name: Place keymap in QMK firmware
+        run: |
+          mkdir -p "$HOME/qmk_firmware/keyboards/crkbd/keymaps/crkbd-guevados"
+          cp keymap.c config.h rules.mk "$HOME/qmk_firmware/keyboards/crkbd/keymaps/crkbd-guevados/"
+
+      # 6. Convertir keymap.c → JSON → YAML → SVG
+      - name: Parse and draw keymap
+        run: |
+          mkdir -p keymap-drawer
+
+          # Paso A: Convertir keymap.c → JSON con qmk c2json
+          #         (necesita correr dentro del firmware QMK)
+          cd ~/qmk_firmware
+          echo "=== Convirtiendo keymap.c a JSON ==="
+          qmk c2json -kb crkbd/rev1 -km crkbd-guevados > /tmp/keymap.json
+          echo "=== JSON generado ==="
+          cat /tmp/keymap.json
+
+          # Paso B: Parsear JSON → YAML con keymap-drawer
+          #         -c 12 = 12 columnas totales (6 por lado del Corne split)
+          #         -q    = modo QMK (entrada en formato JSON)
+          cd "$GITHUB_WORKSPACE"
+          echo "=== Parseando JSON a YAML ==="
+          keymap parse -c 12 -q /tmp/keymap.json > keymap-drawer/crkbd-guevados.yaml
+          echo "=== YAML generado ==="
+          cat keymap-drawer/crkbd-guevados.yaml
+
+          # Paso C: Dibujar SVG desde el YAML
+          #         -k crkbd/rev1            = teclado QMK (obtiene layout físico de la API)
+          #         -l LAYOUT_split_3x6_3    = layout del Corne (3 filas, 6 cols, 3 thumb)
+          echo "=== Dibujando SVG ==="
+          keymap draw \
+            -k crkbd/rev1 \
+            -l LAYOUT_split_3x6_3 \
+            keymap-drawer/crkbd-guevados.yaml > keymap-drawer/crkbd-guevados.svg
+          echo "=== SVG generado ==="
+          head -5 keymap-drawer/crkbd-guevados.svg
+
+      # 7. Commitear los resultados (SVG + YAML) al repo
+      - name: Commit drawings
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          file_pattern: 'keymap-drawer/*.svg keymap-drawer/*.yaml'
+          commit_message: '🎨 keymap-drawer render'

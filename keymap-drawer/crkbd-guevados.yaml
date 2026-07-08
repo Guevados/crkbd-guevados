@@ -1,0 +1,42 @@
+layout: {qmk_keyboard: crkbd/rev1, layout_name: LAYOUT_split_3x6_3}
+layers:
+  L0:
+  - [ESC, Q, W, E, R, T, Y, U, I, O, P, BSPC]
+  - [TAB, A, S, D, F, G, H, J, K, L, TD(TD PC), TD(TD COMI)]
+  - [LCTL, Z, X, C, V, B, N, M, TD(TD COMM), TD(TD DOT), TD(TD SLA), TD(TD CAPLOCK)]
+  - - LGUI
+    - L1
+    - SPC
+    - {t: ENT, h: RSFT}
+    - L2
+    - LALT
+  L1:
+  - [TAB, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BSPC]
+  - [LCTL, '', '', '', '', '', LEFT, DOWN, UP, RIGHT, VOLU, MUTE]
+  - [LSFT, UNDO, CUT, COPY, PASTE, '', '', '', '', MPRV, VOLD, MNXT]
+  - - LGUI
+    - {type: held}
+    - SPC
+    - ENT
+    - L3
+    - RALT
+  L2:
+  - [TAB, '!', '@', '#', $, '%', ^, '&', '*', TD(TD PRN), '', BSPC]
+  - [F1, F2, F3, F4, F5, F6, TD(TD MINS), TD(TD EQL), TD(TD PIPE), TD(TD BRC), '', TD(TD GRAVE)]
+  - [F7, F8, F9, F10, F11, F12, '', '', '', TD(TD CBR), '', PSCR]
+  - - LGUI
+    - L3
+    - SPC
+    - ENT
+    - {type: held}
+    - RALT
+  L3:
+  - [QK BOOT, '', '', '', '', '', '', '', INS, '', PSCR, DEL]
+  - [RM TOGG, RM HUEU, RM SATU, RM VALU, '', '', HOME, PGDN, PGUP, END, '', '']
+  - [RM NEXT, RM HUED, RM SATD, RM VALD, '', '', '', '', '', '', '', '']
+  - - LGUI
+    - {type: held}
+    - SPC
+    - ENT
+    - {type: held}
+    - RALT

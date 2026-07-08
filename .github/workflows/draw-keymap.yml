@@ -8,8 +8,8 @@
 name: Draw keymap
 
 on:
-  workflow_dispatch:           # disparo manual desde la pestaña Actions
-  push:                       # disparo automático al cambiar estos archivos
+  workflow_dispatch: # disparo manual desde la pestaña Actions
+  push: # disparo automático al cambiar estos archivos
     paths:
       - "keymap.c"
       - "config.h"
@@ -24,7 +24,7 @@ jobs:
   draw:
     runs-on: ubuntu-latest
     permissions:
-      contents: write          # permiso para commitear al repo
+      contents: write # permiso para commitear al repo
 
     steps:
       # 1. Checkout del repo del usuario
@@ -88,5 +88,5 @@ jobs:
       - name: Commit drawings
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          file_pattern: 'keymap-drawer/*.svg keymap-drawer/*.yaml'
-          commit_message: '🎨 keymap-drawer render'
+          file_pattern: "keymap-drawer/*.svg keymap-drawer/*.yaml"
+          commit_message: "🎨 keymap-drawer render"
